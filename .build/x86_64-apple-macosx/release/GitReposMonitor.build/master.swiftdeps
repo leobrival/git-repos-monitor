@@ -1,0 +1,10 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "f24e779aa8fbe995971547dcf4cb709e8cacb82b998febb703c578690febcc80"
+build_start_time: [1771937038, 794662000]
+build_end_time: [1771937044, 287312000]
+inputs:
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/GitReposMonitorApp.swift": [1771936858, 928624800]
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/MenuBarView.swift": [1771937032, 425468031]
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoModel.swift": [1771936850, 874091042]
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoScanner.swift": [1771936931, 357565705]
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/SettingsView.swift": [1771936909, 729910551]

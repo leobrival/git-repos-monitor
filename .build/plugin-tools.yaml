@@ -1,0 +1,66 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "GitReposMonitor-x86_64-apple-macosx15.0-release.exe": ["<GitReposMonitor-x86_64-apple-macosx15.0-release.exe>"]
+  "GitReposMonitor-x86_64-apple-macosx15.0-release.module": ["<GitReposMonitor-x86_64-apple-macosx15.0-release.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<GitReposMonitor-x86_64-apple-macosx15.0-release.exe>","<GitReposMonitor-x86_64-apple-macosx15.0-release.module>"]
+  "test": ["<GitReposMonitor-x86_64-apple-macosx15.0-release.exe>","<GitReposMonitor-x86_64-apple-macosx15.0-release.module>"]
+default: "main"
+nodes:
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/GitReposMonitorApp.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/MenuBarView.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoModel.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoScanner.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/SettingsView.swift"]
+    outputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/sources"]
+    description: "Write auxiliary file /Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/sources"
+
+  "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swift.o"]
+    outputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.product/Objects.LinkFileList"
+
+  "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+
+  "<GitReposMonitor-x86_64-apple-macosx15.0-release.exe>":
+    tool: phony
+    inputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor"]
+    outputs: ["<GitReposMonitor-x86_64-apple-macosx15.0-release.exe>"]
+
+  "<GitReposMonitor-x86_64-apple-macosx15.0-release.module>":
+    tool: phony
+    inputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/Modules/GitReposMonitor.swiftmodule"]
+    outputs: ["<GitReposMonitor-x86_64-apple-macosx15.0-release.module>"]
+
+  "C.GitReposMonitor-x86_64-apple-macosx15.0-release.exe":
+    tool: shell
+    inputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.product/Objects.LinkFileList"]
+    outputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor"]
+    description: "Linking ./.build/x86_64-apple-macosx/release/GitReposMonitor"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release","-o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor","-module-name","GitReposMonitor","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-dead_strip","-Xlinker","-alias","-Xlinker","_GitReposMonitor_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.product/Objects.LinkFileList","-target","x86_64-apple-macosx13.0","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.GitReposMonitor-x86_64-apple-macosx15.0-release.module":
+    tool: shell
+    inputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/GitReposMonitorApp.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/MenuBarView.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoModel.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoScanner.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/SettingsView.swift","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/sources"]
+    outputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swift.o","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/Modules/GitReposMonitor.swiftmodule"]
+    description: "Compiling Swift Module 'GitReposMonitor' (5 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","GitReposMonitor","-emit-dependencies","-emit-module","-emit-module-path","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/Modules/GitReposMonitor.swiftmodule","-output-file-map","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/output-file-map.json","-whole-module-optimization","-num-threads","16","-c","@/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/sources","-I","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/Modules","-target","x86_64-apple-macosx13.0","-O","-j16","-DSWIFT_PACKAGE","-module-cache-path","/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","GitReposMonitor_main","-swift-version","5","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","git_repos_monitor"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/","/Users/leobrival/Developer/cli/git-repos-monitor/Package.swift","/Users/leobrival/Developer/cli/git-repos-monitor/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

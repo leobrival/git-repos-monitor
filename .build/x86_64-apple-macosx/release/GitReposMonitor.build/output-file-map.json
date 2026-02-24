@@ -1,0 +1,32 @@
+{
+  "": {
+    "dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitor.d",
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitor.o",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/master.swiftdeps"
+  },
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/GitReposMonitorApp.swift": {
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swift.o",
+    "swiftmodule": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/GitReposMonitorApp.swiftdeps"
+  },
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/MenuBarView.swift": {
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swift.o",
+    "swiftmodule": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView~partial.swiftmodule",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/MenuBarView.swiftdeps"
+  },
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoModel.swift": {
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swift.o",
+    "swiftmodule": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoModel.swiftdeps"
+  },
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/RepoScanner.swift": {
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swift.o",
+    "swiftmodule": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner~partial.swiftmodule",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/RepoScanner.swiftdeps"
+  },
+  "/Users/leobrival/Developer/cli/git-repos-monitor/Sources/GitReposMonitor/SettingsView.swift": {
+    "object": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swift.o",
+    "swiftmodule": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/leobrival/Developer/cli/git-repos-monitor/.build/x86_64-apple-macosx/release/GitReposMonitor.build/SettingsView.swiftdeps"
+  }
+}
