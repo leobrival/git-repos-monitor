@@ -13,9 +13,9 @@ enum RepoStatus: Comparable {
     var color: Color {
         switch self {
         case .dirty(let staged, _, _):
-            return staged > 0 ? .orange : .yellow
+            return staged > 0 ? Theme.error : Theme.warning
         case .clean:
-            return .green
+            return Theme.success
         }
     }
 

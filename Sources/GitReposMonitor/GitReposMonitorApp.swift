@@ -10,7 +10,7 @@ struct GitReposMonitorApp: App {
             if showSettings {
                 SettingsView(scanner: scanner)
                     .padding(.bottom, 4)
-                Divider()
+                Rectangle().fill(Theme.border).frame(height: 1)
                 Button {
                     withAnimation { showSettings = false }
                 } label: {
@@ -18,11 +18,14 @@ struct GitReposMonitorApp: App {
                         Image(systemName: "chevron.left")
                         Text("Back")
                     }
-                    .font(.caption)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Theme.textSecondary)
                 }
                 .buttonStyle(.borderless)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Theme.bg)
             } else {
                 MenuBarView(scanner: scanner, showSettings: $showSettings)
             }

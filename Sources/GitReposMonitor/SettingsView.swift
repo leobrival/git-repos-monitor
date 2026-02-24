@@ -5,37 +5,38 @@ struct SettingsView: View {
     @State private var newPath: String = ""
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 0) {
             // Header
             HStack(spacing: 8) {
                 Image(systemName: "gear")
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Theme.textSecondary)
                 Text("Settings")
-                    .font(.headline)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Theme.textPrimary)
             }
-            .padding(.horizontal, 14)
-            .padding(.top, 10)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
 
-            Divider()
+            Rectangle().fill(Theme.border).frame(height: 1)
 
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 8) {
                 // Scan paths
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Image(systemName: "folder.badge.gearshape")
-                            .foregroundStyle(.blue)
-                        Text("Scan Directories")
-                            .font(.caption.bold())
-                    }
+                    Text("Scan Directories")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Theme.textSecondary)
+                        .textCase(.uppercase)
+                        .tracking(0.5)
 
                     ForEach(scanner.scanPaths, id: \.self) { path in
                         HStack(spacing: 6) {
                             Image(systemName: "folder.fill")
-                                .font(.caption2)
-                                .foregroundStyle(.blue.opacity(0.6))
+                                .font(.system(size: 9))
+                                .foregroundStyle(Theme.textMuted)
                             Text(path.replacingOccurrences(of: NSHomeDirectory(), with: "~"))
-                                .font(.system(.caption, design: .monospaced))
+                                .font(.system(size: 11, design: .monospaced))
+                                .foregroundStyle(Theme.textSecondary)
                                 .lineLimit(1)
                                 .truncationMode(.middle)
 
@@ -44,89 +45,93 @@ struct SettingsView: View {
                             Button {
                                 withAnimation { scanner.removeScanPath(path) }
                             } label: {
-                                Image(systemName: "minus.circle.fill")
-                                    .font(.caption)
-                                    .foregroundStyle(.red.opacity(0.6))
+                                Image(systemName: "minus")
+                                    .font(.system(size: 9, weight: .medium))
+                                    .foregroundStyle(Theme.textMuted)
+                                    .frame(width: 16, height: 16)
+                                    .background(Theme.textMuted.opacity(0.1))
+                                    .clipShape(RoundedRectangle(cornerRadius: Theme.radiusSm))
                             }
                             .buttonStyle(.borderless)
                         }
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 3)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
                         .background(
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(nsColor: .controlBackgroundColor).opacity(0.4))
+                            RoundedRectangle(cornerRadius: Theme.radiusSm)
+                                .fill(Theme.bgElevated)
                         )
                     }
 
                     HStack(spacing: 6) {
                         TextField("~/path/to/scan", text: $newPath)
                             .textFieldStyle(.roundedBorder)
-                            .font(.system(.caption, design: .monospaced))
+                            .font(.system(size: 11, design: .monospaced))
 
                         Button {
                             let path = newPath.trimmingCharacters(in: .whitespaces)
                             guard !path.isEmpty else { return }
-                            withAnimation {
-                                scanner.addScanPath(path)
-                            }
+                            withAnimation { scanner.addScanPath(path) }
                             newPath = ""
                         } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.caption)
-                                .foregroundStyle(.green)
+                            Image(systemName: "plus")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundStyle(Theme.textPrimary)
+                                .frame(width: 22, height: 22)
+                                .background(Theme.bgElevated)
+                                .clipShape(RoundedRectangle(cornerRadius: Theme.radiusSm))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: Theme.radiusSm)
+                                        .strokeBorder(Theme.border, lineWidth: 1)
+                                )
                         }
                         .buttonStyle(.borderless)
                         .disabled(newPath.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
 
-                    HStack(spacing: 4) {
-                        Image(systemName: "info.circle")
-                            .font(.caption2)
-                        Text("Depth: 4 levels. Excludes node_modules, .build, vendor.")
-                            .font(.caption2)
-                    }
-                    .foregroundStyle(.tertiary)
+                    Text("Depth: 4 levels. Excludes node_modules, .build, vendor.")
+                        .font(.system(size: 10))
+                        .foregroundStyle(Theme.textMuted)
                 }
-                .padding(10)
+                .padding(12)
                 .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(Color(nsColor: .controlBackgroundColor).opacity(0.3))
+                    RoundedRectangle(cornerRadius: Theme.radiusMd)
+                        .fill(Theme.bgCard)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .strokeBorder(Color(nsColor: .separatorColor).opacity(0.3), lineWidth: 0.5)
+                    RoundedRectangle(cornerRadius: Theme.radiusMd)
+                        .strokeBorder(Theme.borderSubtle, lineWidth: 1)
                 )
 
                 // Info
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Image(systemName: "info.circle")
-                            .foregroundStyle(.blue)
-                        Text("Info")
-                            .font(.caption.bold())
-                    }
+                    Text("Info")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Theme.textSecondary)
+                        .textCase(.uppercase)
+                        .tracking(0.5)
 
-                    VStack(spacing: 4) {
+                    VStack(spacing: 6) {
                         InfoRow(label: "Refresh interval", value: "2 minutes")
                         InfoRow(label: "Repos found", value: "\(scanner.repos.count)")
-                        InfoRow(label: "Dirty repos", value: "\(scanner.dirtyCount)", color: scanner.dirtyCount > 0 ? .orange : nil)
-                        InfoRow(label: "Total staged files", value: "\(scanner.stagedCount)", color: scanner.stagedCount > 0 ? .yellow : nil)
+                        InfoRow(label: "Dirty repos", value: "\(scanner.dirtyCount)", color: scanner.dirtyCount > 0 ? Theme.warning : nil)
+                        InfoRow(label: "Total staged files", value: "\(scanner.stagedCount)", color: scanner.stagedCount > 0 ? Theme.error : nil)
                     }
                 }
-                .padding(10)
+                .padding(12)
                 .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(Color(nsColor: .controlBackgroundColor).opacity(0.3))
+                    RoundedRectangle(cornerRadius: Theme.radiusMd)
+                        .fill(Theme.bgCard)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .strokeBorder(Color(nsColor: .separatorColor).opacity(0.3), lineWidth: 0.5)
+                    RoundedRectangle(cornerRadius: Theme.radiusMd)
+                        .strokeBorder(Theme.borderSubtle, lineWidth: 1)
                 )
             }
-            .padding(.horizontal, 14)
-            .padding(.bottom, 10)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
         .frame(width: 400)
+        .background(Theme.bg)
     }
 }
 
@@ -138,12 +143,12 @@ struct InfoRow: View {
     var body: some View {
         HStack {
             Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 12))
+                .foregroundStyle(Theme.textSecondary)
             Spacer()
             Text(value)
-                .font(.caption)
-                .foregroundStyle(color ?? .secondary)
+                .font(.system(size: 12))
+                .foregroundStyle(color ?? Theme.textTertiary)
         }
     }
 }

@@ -9,82 +9,71 @@ struct MenuBarView: View {
             // Header
             HStack(spacing: 8) {
                 Image(systemName: "arrow.triangle.branch")
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-                VStack(alignment: .leading, spacing: 1) {
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Theme.textSecondary)
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Git Repos")
-                        .font(.headline)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(Theme.textPrimary)
                     Text("\(scanner.repos.count) repos found")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textTertiary)
                 }
                 Spacer()
                 if scanner.isScanning {
                     ProgressView()
-                        .scaleEffect(0.6)
+                        .scaleEffect(0.5)
+                        .tint(Theme.textSecondary)
                 }
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
 
-            Divider()
+            Rectangle().fill(Theme.border).frame(height: 1)
 
             // Stats bar
             HStack(spacing: 12) {
-                StatPill(
-                    icon: "exclamationmark.circle.fill",
-                    count: scanner.dirtyCount,
-                    label: "dirty",
-                    color: .orange
-                )
+                StatPill(icon: "circle.fill", count: scanner.dirtyCount, label: "dirty", color: Theme.warning)
                 if scanner.stagedCount > 0 {
-                    StatPill(
-                        icon: "tray.full.fill",
-                        count: scanner.stagedCount,
-                        label: "staged",
-                        color: .yellow
-                    )
+                    StatPill(icon: "circle.fill", count: scanner.stagedCount, label: "staged", color: Theme.error)
                 }
-                StatPill(
-                    icon: "checkmark.circle.fill",
-                    count: scanner.repos.count - scanner.dirtyCount,
-                    label: "clean",
-                    color: .green
-                )
+                StatPill(icon: "circle.fill", count: scanner.repos.count - scanner.dirtyCount, label: "clean", color: Theme.success)
 
                 Spacer()
 
                 Toggle(isOn: $scanner.showCleanRepos) {
                     Text("All")
-                        .font(.caption2)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textSecondary)
                 }
                 .toggleStyle(.switch)
                 .controlSize(.mini)
+                .tint(Theme.success)
             }
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 16)
             .padding(.vertical, 8)
 
-            Divider()
+            Rectangle().fill(Theme.border).frame(height: 1)
 
             if scanner.filteredRepos.isEmpty {
                 VStack(spacing: 8) {
-                    Image(systemName: scanner.showCleanRepos ? "magnifyingglass" : "checkmark.seal.fill")
-                        .font(.title2)
-                        .foregroundStyle(scanner.showCleanRepos ? Color.secondary : Color.green)
+                    Image(systemName: scanner.showCleanRepos ? "magnifyingglass" : "checkmark.circle")
+                        .font(.system(size: 20, weight: .light))
+                        .foregroundStyle(scanner.showCleanRepos ? Theme.textSecondary : Theme.success)
                     Text(scanner.showCleanRepos ? "No repos found" : "All repos are clean")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 12))
+                        .foregroundStyle(Theme.textSecondary)
                     if !scanner.showCleanRepos && scanner.repos.count > 0 {
                         Text("Toggle 'All' to see \(scanner.repos.count) repos")
-                            .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                            .font(.system(size: 10))
+                            .foregroundStyle(Theme.textMuted)
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 24)
+                .padding(.vertical, 28)
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 4) {
+                    LazyVStack(spacing: 2) {
                         ForEach(scanner.filteredRepos) { repo in
                             RepoCard(repo: repo)
                         }
@@ -95,7 +84,7 @@ struct MenuBarView: View {
                 .frame(maxHeight: 400)
             }
 
-            Divider()
+            Rectangle().fill(Theme.border).frame(height: 1)
 
             // Footer
             HStack(spacing: 0) {
@@ -103,14 +92,15 @@ struct MenuBarView: View {
                     withAnimation { scanner.scan() }
                 } label: {
                     Image(systemName: "arrow.clockwise")
-                        .font(.caption)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textSecondary)
                 }
                 .buttonStyle(.borderless)
                 .help("Rescan")
 
                 Text("Updated \(scanner.lastScanAgo)")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Theme.textMuted)
                     .padding(.leading, 6)
 
                 Spacer()
@@ -119,33 +109,33 @@ struct MenuBarView: View {
                     withAnimation { showSettings = true }
                 } label: {
                     Image(systemName: "gear")
-                        .font(.caption)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textSecondary)
                 }
                 .buttonStyle(.borderless)
                 .help("Settings")
 
-                Divider()
-                    .frame(height: 12)
-                    .padding(.horizontal, 8)
+                Rectangle().fill(Theme.border).frame(width: 1, height: 12).padding(.horizontal, 8)
 
                 Button {
                     NSApplication.shared.terminate(nil)
                 } label: {
                     Image(systemName: "power")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 11))
+                        .foregroundStyle(Theme.textMuted)
                 }
                 .buttonStyle(.borderless)
                 .help("Quit")
             }
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 16)
             .padding(.vertical, 8)
         }
         .frame(width: 400)
+        .background(Theme.bg)
     }
 }
 
-// MARK: - Stat Pill (shared pattern)
+// MARK: - Stat Pill
 
 struct StatPill: View {
     let icon: String
@@ -156,13 +146,14 @@ struct StatPill: View {
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: icon)
-                .font(.caption2)
+                .font(.system(size: 6))
                 .foregroundStyle(color)
             Text("\(count)")
-                .font(.caption.bold())
+                .font(.system(size: 12, weight: .medium, design: .monospaced))
+                .foregroundStyle(Theme.textPrimary)
             Text(label)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+                .font(.system(size: 11))
+                .foregroundStyle(Theme.textTertiary)
         }
     }
 }
@@ -179,28 +170,30 @@ struct RepoCard: View {
             HStack(spacing: 6) {
                 Circle()
                     .fill(repo.status.color)
-                    .frame(width: 8, height: 8)
+                    .frame(width: 6, height: 6)
 
                 Text(repo.name)
-                    .font(.system(.callout, design: .default).bold())
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(Theme.textPrimary)
                     .lineLimit(1)
 
                 Text(repo.branch)
-                    .font(.system(.caption2, design: .monospaced))
-                    .padding(.horizontal, 5)
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundStyle(Theme.textTertiary)
+                    .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(Color.accentColor.opacity(0.12))
-                    .cornerRadius(3)
+                    .background(Theme.bgElevated)
+                    .clipShape(RoundedRectangle(cornerRadius: Theme.radiusSm))
 
                 Spacer()
 
-                // Actions
                 HStack(spacing: 2) {
                     Button {
                         openInTerminal(repo.path)
                     } label: {
                         Image(systemName: "terminal")
-                            .font(.caption2)
+                            .font(.system(size: 10))
+                            .foregroundStyle(Theme.textMuted)
                             .frame(width: 20, height: 20)
                     }
                     .buttonStyle(.borderless)
@@ -210,7 +203,8 @@ struct RepoCard: View {
                         NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: repo.path)
                     } label: {
                         Image(systemName: "folder")
-                            .font(.caption2)
+                            .font(.system(size: 10))
+                            .foregroundStyle(Theme.textMuted)
                             .frame(width: 20, height: 20)
                     }
                     .buttonStyle(.borderless)
@@ -222,78 +216,52 @@ struct RepoCard: View {
             if repo.status.isDirty {
                 HStack(spacing: 6) {
                     if repo.status.stagedCount > 0 {
-                        ChangeBadge(
-                            icon: "tray.full.fill",
-                            count: repo.status.stagedCount,
-                            label: "staged",
-                            color: .orange
-                        )
+                        ChangeBadge(count: repo.status.stagedCount, label: "staged", color: Theme.error)
                     }
                     if repo.status.unstagedCount > 0 {
-                        ChangeBadge(
-                            icon: "pencil",
-                            count: repo.status.unstagedCount,
-                            label: "modified",
-                            color: .yellow
-                        )
+                        ChangeBadge(count: repo.status.unstagedCount, label: "modified", color: Theme.warning)
                     }
                     if repo.status.untrackedCount > 0 {
-                        ChangeBadge(
-                            icon: "questionmark.circle",
-                            count: repo.status.untrackedCount,
-                            label: "untracked",
-                            color: .secondary
-                        )
+                        ChangeBadge(count: repo.status.untrackedCount, label: "untracked", color: Theme.textSecondary)
                     }
                 }
-                .padding(.leading, 14)
+                .padding(.leading, 12)
             }
 
             // Last commit + path
-            HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "clock")
-                            .font(.system(size: 8))
-                        Text(repo.lastCommitAgo)
-                        Text("·")
-                        Text(repo.lastCommitMessage)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                    }
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-
-                    Text(repo.displayPath)
-                        .font(.system(.caption2, design: .monospaced))
-                        .foregroundStyle(.quaternary)
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 4) {
+                    Text(repo.lastCommitAgo)
+                    Text("·")
+                    Text(repo.lastCommitMessage)
                         .lineLimit(1)
-                        .truncationMode(.middle)
+                        .truncationMode(.tail)
                 }
-                .padding(.leading, 14)
+                .font(.system(size: 10))
+                .foregroundStyle(Theme.textMuted)
+
+                Text(repo.displayPath)
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundStyle(Theme.textMuted.opacity(0.6))
+                    .lineLimit(1)
+                    .truncationMode(.middle)
             }
+            .padding(.leading, 12)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(
-            RoundedRectangle(cornerRadius: 6)
-                .fill(isHovered
-                    ? Color(nsColor: .controlBackgroundColor).opacity(0.5)
-                    : Color(nsColor: .controlBackgroundColor).opacity(0.3)
-                )
+            RoundedRectangle(cornerRadius: Theme.radiusMd)
+                .fill(isHovered ? Theme.bgCardHover : Theme.bgCard)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 6)
+            RoundedRectangle(cornerRadius: Theme.radiusMd)
                 .strokeBorder(
-                    repo.status.isDirty
-                        ? repo.status.color.opacity(0.15)
-                        : Color(nsColor: .separatorColor).opacity(0.2),
-                    lineWidth: 0.5
+                    repo.status.isDirty ? repo.status.color.opacity(0.1) : Theme.borderSubtle,
+                    lineWidth: 1
                 )
         )
-        .onHover { hovering in
-            isHovered = hovering
-        }
+        .onHover { hovering in isHovered = hovering }
     }
 
     private func openInTerminal(_ path: String) {
@@ -309,23 +277,22 @@ struct RepoCard: View {
 // MARK: - Change Badge
 
 struct ChangeBadge: View {
-    let icon: String
     let count: Int
     let label: String
     let color: Color
 
     var body: some View {
         HStack(spacing: 3) {
-            Image(systemName: icon)
-                .font(.system(size: 8))
+            Text("\(count)")
+                .font(.system(size: 10, weight: .medium, design: .monospaced))
                 .foregroundStyle(color)
-            Text("\(count) \(label)")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            Text(label)
+                .font(.system(size: 10))
+                .foregroundStyle(Theme.textTertiary)
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
         .background(color.opacity(0.08))
-        .cornerRadius(3)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.radiusSm))
     }
 }
